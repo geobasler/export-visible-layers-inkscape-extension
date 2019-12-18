@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <name>Export Visible Layers</name>
+  <id>gb.export.visible.layers</id>
+  <param name="file" type="string" gui-text="File name: "></param>
+  <param name="overwrite" type="bool" gui-text="Overwrite existing exports">true</param>
+  <param name="directory" type="path" mode="folder" gui-text="Directory"></param>
+  <effect needs-live-preview="false">
+      <object-type>all</object-type>
+      <effects-menu>
+          <submenu name="Export"></submenu>
+      </effects-menu>
+  </effect>
+  <script>
+      <command location="inx" interpreter="python">export_visible_layers.py</command>
+  </script>
+</inkscape-extension>
