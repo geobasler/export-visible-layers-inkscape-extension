@@ -3,11 +3,6 @@ import inkex
 from lxml import etree
 from copy import deepcopy
 
-try:
-    from base64 import decodebytes
-except ImportError:
-    from base64 import decodestring as decodebytes
-
 class ExportVisibleLayers(inkex.EffectExtension):
     """Exports the visible layers as SVG file"""
     def __init__(self):
@@ -46,8 +41,8 @@ class ExportVisibleLayers(inkex.EffectExtension):
         layers = resDocument.findall(inkex.addNS('g', 'svg'))
         layers2remove = []
         for layer in layers:
-            if layer.groupmode == 'layer':
-                if layer.style == 'display: none':
+            if hasattr(layer, 'groupmode') and layer.groupmode == 'layer':
+                if hasattr(layer, 'style') and layer.style == 'display:none':
                     root.remove(layer)
         if not self.options.overwrite and os.path.exists(path):
             inkex.errormsg('Error: file exists: ' + path)
